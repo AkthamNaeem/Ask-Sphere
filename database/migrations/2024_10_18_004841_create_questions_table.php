@@ -22,8 +22,8 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->text('content');
-            $table->bigInteger('views');
-            $table->boolean('is_answered');
+            $table->bigInteger('views')->default(0);
+            $table->boolean('is_answered')->default(false);
             $table->timestamps();
         });
     }
