@@ -15,6 +15,7 @@ class Answer extends Model
         'user_id',
         'question_id',
         'content',
+        'is_best',
     ];
 
     public function user(): HasMany {
