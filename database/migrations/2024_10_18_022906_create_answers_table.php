@@ -22,7 +22,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->text('content');
-            $table->boolean('is_best');
+            $table->boolean('is_best')->default(false);
             $table->timestamps();
         });
     }
