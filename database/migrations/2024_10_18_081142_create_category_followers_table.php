@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('category_followers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('question_id')
-                ->constrained('questions')
+            $table->foreignId('category_id')
+                ->constrained('categories')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->text('content');
-            $table->boolean('is_best');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('category_followers');
     }
 };
