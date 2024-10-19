@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
-use function Laravel\Prompts\select;
+use Illuminate\Support\Facades\DB;
 
 class CategoryService
 {
@@ -12,7 +12,6 @@ class CategoryService
 
         $category = Category::query()->create([
             'name' => $request['name'],
-            'icon' => $request['icon'] ?? null,
         ]);
 
         $data = $category;
@@ -28,7 +27,6 @@ class CategoryService
 
         $category->update([
             'name' => $request['name'] ?? $category['name'],
-            'icon' => $request['icon'] ?? $category['icon'],
         ]);
 
         $data = $category;
@@ -40,7 +38,13 @@ class CategoryService
     public function index(): array {
         $data = [];
 
-        $categories = Category::query()->select('id', 'name', 'icon')->orderBy('name')->get();
+        $categories = Category::query()
+            ->select('categories.id', 'categories.name',
+                DB::raw('COUNT(DISTINCT questions.id) as questions_count'))
+            ->leftJoin('questions', 'questions.category_id', '=', 'categories.id')
+            ->groupBy('categories.id', 'categories.name')
+            ->orderBy('questions_count', 'desc')
+            ->get();
 
         $data = $categories;
         $message = 'success';
@@ -51,7 +55,11 @@ class CategoryService
     public function show($request): array {
         $data = [];
 
-        $category = Category::query()->find($request['category_id']);
+        $category = Category::query()->select('categories.id', 'categories.name',
+                DB::raw('COUNT(DISTINCT questions.id) as questions_count'))
+            ->leftJoin('questions', 'questions.category_id', '=', 'categories.id')
+            ->groupBy('categories.id', 'categories.name')
+            ->find($request['category_id']);
 
         $data = $category;
         $message = 'success';

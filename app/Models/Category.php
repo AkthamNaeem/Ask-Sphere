@@ -12,15 +12,9 @@ class Category extends Model
     protected $table = "categories";
     protected $fillable = [
         'name',
-        'icon',
     ];
 
     public function question(): BelongsTo {
         return $this->belongsTo('questions');
     }
-
-    public function tag(): BelongsTo {
-        return $this->belongsTo('tags');
-    }
-
 }

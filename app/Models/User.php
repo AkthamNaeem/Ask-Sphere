@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'photo',
     ];
 
     /**
@@ -53,10 +54,6 @@ class User extends Authenticatable
     }
 
     public function question(): BelongsTo {
-        return $this->belongsTo('likes');
-    }
-
-    public function report(): BelongsTo {
         return $this->belongsTo('likes');
     }
 }
