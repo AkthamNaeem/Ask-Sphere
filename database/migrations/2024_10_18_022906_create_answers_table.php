@@ -22,6 +22,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->text('content');
+            $table->string('photo')->nullable();
             $table->boolean('is_best')->default(false);
             $table->timestamps();
         });

@@ -22,7 +22,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->text('content');
-            $table->bigInteger('views')->default(0);
+            $table->string('photo')->nullable();
             $table->boolean('is_answered')->default(false);
             $table->timestamps();
         });

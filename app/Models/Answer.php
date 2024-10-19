@@ -15,6 +15,7 @@ class Answer extends Model
         'user_id',
         'question_id',
         'content',
+        'photo',
         'is_best',
     ];
 
@@ -29,10 +30,5 @@ class Answer extends Model
     public function likes(): MorphMany
     {
         return $this->morphMany(Like::class, 'likeable');
-    }
-
-    public function reports(): MorphMany
-    {
-        return $this->morphMany(Like::class, 'reportable');
     }
 }

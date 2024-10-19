@@ -23,8 +23,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'category_id' => ['required', 'exists:categories,id'],
-            'name' => ['required_without_all:icon', 'string'],
-            'icon' => ['required_without_all:name', 'image', 'mimes:jpeg,png,bmp,jpg'],
+            'name' => ['required', 'string'],
         ];
     }
 }

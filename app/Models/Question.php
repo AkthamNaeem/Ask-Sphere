@@ -16,7 +16,7 @@ class Question extends Model
         'user_id',
         'category_id',
         'content',
-        'views',
+        'photo',
         'is_answered',
     ];
 
@@ -32,17 +32,8 @@ class Question extends Model
         return $this->belongsTo('answers');
     }
 
-    public function question_tag(): BelongsTo {
-        return $this->belongsTo('question_tags');
-    }
-
     public function likes(): MorphMany
     {
         return $this->morphMany(Like::class, 'likeable');
-    }
-
-    public function reports(): MorphMany
-    {
-        return $this->morphMany(Like::class, 'reportable');
     }
 }
